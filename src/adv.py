@@ -55,15 +55,34 @@ print(f"\nHello {player.name}")
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-player_input = None
-while (player_input is not 'q'):
+
+while True:
     print(f"\nCurrent room: {player.room.name}\n")
     print(f"{player.room.description}\n")
     print('Where would you like to move?\n')
     print('[n]North [s]South [e]East [w]West [q]Quit')
-    player_input = input()
-    previous_room = player.room
-    player.move(player_input)
-    if player.room == None:
-        print('\nCannot go that way\n')
-        player.room = previous_room
+    command = input()
+    if command == 'n':
+        try:
+            player.room = player.room.n_to
+        except:
+            print('Cannot go that way')
+    elif command == 'e':
+        try:
+            player.room = player.room.e_to
+        except:
+            print('Cannot go that way')
+    elif command == 's':
+        try:
+            player.room = player.room.s_to
+        except:
+            print('Cannot go that way')
+    elif command == 'w':
+        try:
+            player.room = player.room.w_to
+        except:
+            print('Cannot go that way')
+    elif command == 'q':
+        exit()
+    else:
+        print('Not a valid direction, try again')
